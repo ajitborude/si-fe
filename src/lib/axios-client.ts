@@ -21,7 +21,7 @@ axiosClient.interceptors.response.use(
   (response) => response,
   async (error) => {
     if (error.response?.status === 401) {
-      console.log('🚀 ~ Error:', error.response);
+      console.error('🚀 Error :', error);
       window.location.href = '/';
       // try {
       //   await axiosClient.get('/auth/token/refresh');

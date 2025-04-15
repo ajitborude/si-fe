@@ -1,82 +1,54 @@
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
+import { Separator } from '@/components/ui/separator';
 import axiosClient from '@/lib/axios-client';
+import localStorageHelper from '@/lib/local-storage';
 import { useEffect, useState } from 'react';
-import { data, useLoaderData } from 'react-router';
-
-export async function userPageLoader() {
-  try {
-    const response = await axiosClient.get(`/user`);
-    return { userData: response.data.data };
-  } catch (error: any) {
-    console.log(error);
-    throw data(error.response.data.error);
-  }
-}
+import { useLoaderData } from 'react-router';
+import MediaCard from './components/media-card';
 
 function UserPage() {
   const loaderData = useLoaderData();
-  const [commentReply, setCommentReply] = useState('');
+  const [mediaList, setMedia] = useState([]);
 
   const getUserMedia = async () => {
     try {
       const response = await axiosClient.get(`/instagram/media`);
-      console.log(response);
+      localStorageHelper.set('media', response.data.data.media);
+      setMedia(response.data.data.media);
     } catch (error: any) {
-      console.log('🚀 ~ getUserMedia ~ error:', error);
-      // throw data(error.response.data.error);
-    }
-  };
-  const getMediaComments = async () => {
-    try {
-      const response = await axiosClient.get(`/instagram/media/18079536832733820/comments`);
-      console.log(response);
-    } catch (error: any) {
-      console.log('🚀 ~ comments ~ error:', error);
-      // throw data(error.response.data.error);
+      console.error('🚀 Error :', error);
+      // throw data(error.response.̦data.error);
     }
   };
 
-  const replyToComment = async () => {
-    try {
-      const response = await axiosClient.post(`/instagram/comment/17905797648038560/reply`, { message: commentReply });
-      console.log(response);
-    } catch (error: any) {
-      console.log('🚀 ~ comments ~ error:', error);
-      // throw data(error.response.data.error);
-    }
-  };
   useEffect(() => {
-    getUserMedia();
+    void getUserMedia();
   }, []);
 
   return (
-    <div className="flex items-start justify-start flex-col w-full h-full">
-      <div className="flex flex-row justify-center items-start">
-        <div className="w-32 h-32 mt-2">
-          <img src={loaderData.userData.profile_picture_url} className="w-full h-full rounded-full"></img>
+    <div className="flex items-center justify-start flex-col w-full h-full p-4 max-w-4xl">
+      <div className="flex flex-row justify-center items-center gap-x-12 mb-12">
+        <div className="w-36 h-36 mt-2">
+          <img src={loaderData.userData.profile_picture_url} alt="pp" className="w-full h-full rounded-full" />
         </div>
-        <div className="flex flex-col mt-1 ml-4 gap-y-2">
+        <div className="flex flex-col mt-1 ml-4 gap-y-4">
           <span className="text-md font-medium">@{loaderData.userData.username}</span>
-          <div className="flex flex-row flex-nowrap gap-2">
+          <div className="flex flex-row flex-nowrap gap-12">
             <span className="font-medium text-sm">{loaderData.userData.media_count} Post</span>
             <span className="font-medium text-sm">
               {loaderData.userData.followers_count} {loaderData.userData.followers_count < 2 ? 'Follower' : 'Followers'}
             </span>
             <span className="font-medium text-sm">{loaderData.userData.follows_count} Following</span>
           </div>
-          <span className="font-bold text-xl">{loaderData.userData.name}</span>
+          <span className="font-bold text-lg">{loaderData.userData.name}</span>
+          <span className="font-bold text-lg">{loaderData.userData.biography}</span>
         </div>
       </div>
-      <Button className="btn btn-ghost border border-neutral mt-4" onClick={getUserMedia}>
-        Get User Media
-      </Button>
-      <Button className="btn btn-ghost border border-neutral mt-4" onClick={getMediaComments}>
-        Get Media Comments
-      </Button>
-      <div className="flex flex-row gap-2 mt-4">
-        <Input placeholder="Reply" type="text" onChange={(e) => setCommentReply(e.target.value)} />
-        <Button onClick={replyToComment}>Reply</Button>
+      <Separator className="my-2" />
+      <div className="grid grid-cols-3 gap-1 justify-center items-center w-full overflow-auto ">
+        {mediaList &&
+          mediaList.map((media: any, ind: number) => {
+            return <MediaCard key={media.id} currentIndex={ind} />;
+          })}
       </div>
     </div>
   );

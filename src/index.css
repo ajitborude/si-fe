@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Merienda:wght@300..900&display=swap');
+
 @import 'tailwindcss';
 @import 'tw-animate-css';
 
@@ -42,6 +44,7 @@
   --aside-width-open: 275px;
   --aside-width-collapsed: 50px;
   --header-height: 0px;
+  --font-merienda: 'Merienda', sans-serif;
 }
 
 :root {
@@ -118,6 +121,11 @@
     @apply bg-background text-foreground p-0 m-0;
   }
 
+  button:not([disabled]),
+  [role='button']:not([disabled]) {
+    cursor: pointer;
+  }
+
   .scrollbar::-webkit-scrollbar {
     @apply w-2 h-2;
   }
@@ -162,5 +170,8 @@
 
   .scrollbar-mini-hidden::-webkit-scrollbar-thumb:hover {
     @apply bg-transparent;
+  }
+  .insta-btn-bg {
+    background: linear-gradient(45deg, #405de6, #5851db, #833ab4, #c13584, #e1306c, #fd1d1d);
   }
 }

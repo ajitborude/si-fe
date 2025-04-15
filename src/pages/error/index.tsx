@@ -4,7 +4,7 @@ import { Link, useRouteError } from 'react-router';
 
 function ErrorPage() {
   const error: any = useRouteError();
-  console.log('🚀 ~ ErrorPage ~ Error:', error);
+
   return (
     <div className="flex flex-col items-center justify-center w-full ">
       <span className="font-bold text-4xl capitalize">Oops, Something&apos;s gone wrong !</span>
