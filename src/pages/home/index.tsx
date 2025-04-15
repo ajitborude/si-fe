@@ -35,7 +35,7 @@ function HomePage() {
             <BsInstagram className="text-white" size={35} /> <span className="text-white">Login with Instagram</span>
           </Link>
         </Button>
-        <Separator className="my-2" />
+        {errorCode && <Separator className="my-4" />}
         {errorCode && <span className="text-destructive">{errorMap[errorCode]}</span>}
       </div>
     </div>
