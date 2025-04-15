@@ -6,7 +6,7 @@ import { BsInstagram } from 'react-icons/bs';
 import { Link, useSearchParams } from 'react-router';
 
 function HomePage() {
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchParams, _setSearchParams] = useSearchParams();
   const errorCode = searchParams.get('error') || null;
   const igClientId = import.meta.env.VITE_APP_IG_CLIENT_ID || '';
   const redirectUri = import.meta.env.VITE_APP_IG_REDIRECT_URI || '';
