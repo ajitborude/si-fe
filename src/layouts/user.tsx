@@ -23,6 +23,9 @@ export default function UserLayout() {
   const triggerLogout = async () => {
     try {
       await axiosClient.post(`/auth/logout`);
+      localStorageHelper.remove('user');
+      localStorageHelper.remove('media');
+      localStorageHelper.remove('current-media');
       void navigate('/', { replace: true });
     } catch (error: any) {
       console.error('🚀 Error :', error);

@@ -77,6 +77,7 @@ function MediaPage() {
   };
 
   const goBack = () => {
+    localStorageHelper.remove('current-media');
     void navigate(`/user/${userData.username}`);
   };
 
