@@ -28,7 +28,7 @@ const isLocalStorageAvailable = () => {
  * @param {string} key The key under which the value will be stored.
  * @param {*} value The value to store. Non-string values are stringified.
  */
-export const setLocalStorageItem = (key, value) => {
+export const setLocalStorageItem = (key: string, value: any) => {
   if (!isLocalStorageAvailable()) return;
 
   try {
@@ -47,7 +47,7 @@ export const setLocalStorageItem = (key, value) => {
  * @param {string} key The key whose value is to be retrieved.
  * @returns {*} The parsed value, or null if not found.
  */
-export const getLocalStorageItem = (key) => {
+export const getLocalStorageItem = (key: string) => {
   if (!isLocalStorageAvailable()) return null;
 
   try {
@@ -66,7 +66,7 @@ export const getLocalStorageItem = (key) => {
  *
  * @param {string} key The key of the item to remove.
  */
-export const removeLocalStorageItem = (key) => {
+export const removeLocalStorageItem = (key: string) => {
   if (!isLocalStorageAvailable()) return;
 
   try {
