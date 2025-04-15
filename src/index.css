@@ -43,7 +43,7 @@
   --color-sidebar-ring: var(--sidebar-ring);
   --aside-width-open: 275px;
   --aside-width-collapsed: 50px;
-  --header-height: 0px;
+  --header-height: 45px;
   --font-merienda: 'Merienda', sans-serif;
 }
 
@@ -171,7 +171,16 @@
   .scrollbar-mini-hidden::-webkit-scrollbar-thumb:hover {
     @apply bg-transparent;
   }
+
   .insta-btn-bg {
     background: linear-gradient(45deg, #405de6, #5851db, #833ab4, #c13584, #e1306c, #fd1d1d);
+  }
+
+  .media-dialog-desktop {
+    @apply min-w-[calc(100svw_-_10%)] h-[calc(100svh_-_10%)] m-auto [&>button:last-child]:hidden border-0 bg-background/5 flex justify-between items-center;
+  }
+
+  .media-dialog-mobile {
+    @apply min-w-[calc(100svw_-_10%)] h-[calc(100svh_-_10%)] m-auto [&>button:last-child]:hidden border-0 bg-background/5 flex justify-between items-center;
   }
 }

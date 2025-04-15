@@ -25,10 +25,13 @@ function UserPage() {
   }, []);
 
   return (
-    <div className="flex items-center justify-start flex-col w-full h-full p-4 max-w-4xl">
-      <div className="flex flex-row justify-center items-center gap-x-12 mb-12">
-        <div className="w-36 h-36 mt-2">
-          <img src={loaderData.userData.profile_picture_url} alt="pp" className="w-full h-full rounded-full" />
+    <div className="flex items-center justify-start flex-col w-full h-full sm:p-4 p-0 sm:max-w-4xl">
+      {/* desktop view */}
+      <div className="sm:flex hidden flex-row justify-center items-center gap-x-12 mb-12">
+        <div className="flex flex-col justify-center items-center">
+          <div className="sm:w-36 sm:h-36 w-24 h-24 mt-2 flex-col">
+            <img src={loaderData.userData.profile_picture_url} alt="pp" className="w-full h-full rounded-full" />
+          </div>
         </div>
         <div className="flex flex-col mt-1 ml-4 gap-y-4">
           <span className="text-md font-medium">@{loaderData.userData.username}</span>
@@ -40,7 +43,35 @@ function UserPage() {
             <span className="font-medium text-sm">{loaderData.userData.follows_count} Following</span>
           </div>
           <span className="font-bold text-lg">{loaderData.userData.name}</span>
-          <span className="font-bold text-lg">{loaderData.userData.biography}</span>
+          <span className="font-normal text-sm">{loaderData.userData.biography}</span>
+        </div>
+      </div>
+      {/* mobile view */}
+      <div className="sm:hidden flex flex-col justify-center items-center gap-x-6 w-full">
+        <div className="flex flex-row justify-between items-center w-full px-8">
+          <div className="flex flex-col justify-center items-center">
+            <div className="sm:w-36 sm:h-36 w-24 h-24 mt-2 flex-col">
+              <img src={loaderData.userData.profile_picture_url} alt="pp" className="w-full h-full rounded-full" />
+            </div>
+            <span className="font-bold text">{loaderData.userData.name}</span>
+            <span className="ont-normal text-sm">{loaderData.userData.biography}</span>
+          </div>
+          <span className="text-md font-medium">@{loaderData.userData.username}</span>
+        </div>
+        <Separator className="my-2" />
+        <div className="sm:hidden flex flex-row items-center justify-between px-8 w-full">
+          <div className="flex flex-col items-center justify-center">
+            <span className="font-medium text-sm">{loaderData.userData.media_count}</span>
+            <span className="font-medium text-sm text-foreground/75">{loaderData.userData.media_count > 2 ? 'posts' : 'post'}</span>
+          </div>
+          <div className="flex flex-col items-center justify-center">
+            <span className="font-medium text-sm">{loaderData.userData.followers_count}</span>
+            <span className="font-medium text-sm text-foreground/75">{loaderData.userData.followers_count > 2 ? 'follower' : 'followers'}</span>
+          </div>
+          <div className="flex flex-col items-center justify-center">
+            <span className="font-medium text-sm">{loaderData.userData.follows_count}</span>
+            <span className="font-medium text-sm text-foreground/75">following</span>
+          </div>
         </div>
       </div>
       <Separator className="my-2" />
