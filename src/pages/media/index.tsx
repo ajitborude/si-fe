@@ -27,11 +27,11 @@ function MediaPage() {
 
   const mediaList = localStorageHelper.get('media');
   const userData = localStorageHelper.get('user');
-  const currentIndex = location.state.currentIndex;
-  const previousIndex = currentIndex > 0 ? currentIndex - 1 : null;
+  const currentIndex = location.state && location.state.currentIndex ? location.state.currentIndex : null;
+  const previousIndex = currentIndex !== null && currentIndex > 0 ? currentIndex - 1 : null;
   const previousMedia = previousIndex !== null ? mediaList[previousIndex] : null;
-  const nextIndex = currentIndex !== null && currentIndex < mediaList.length - 1 ? currentIndex + 1 : null;
-  const nextMedia = nextIndex ? mediaList[nextIndex] : null;
+  const nextIndex = currentIndex < mediaList.length - 1 ? currentIndex + 1 : null;
+  const nextMedia = nextIndex !== null ? mediaList[nextIndex] : null;
 
   const mediaType = media.media_type;
   const isReel = mediaType === 'VIDEO';
