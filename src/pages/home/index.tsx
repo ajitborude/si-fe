@@ -7,17 +7,16 @@ import { Link } from 'react-router';
 function HomePage() {
   const igClientId = import.meta.env.VITE_APP_IG_CLIENT_ID || '';
   const redirectUri = import.meta.env.VITE_APP_IG_REDIRECT_URI || '';
-  // const params = {
-  //   enable_fb_login: 0,
-  //   force_authentication: 1,
-  //   client_id: igClientId,
-  //   redirect_uri: redirectUri,
-  //   response_type: 'code',
-  //   scope:
-  //     'instagram_business_basic,instagram_business_manage_messages,instagram_business_manage_comments,instagram_business_content_publish,instagram_business_manage_insights',
-  // };
-  // const loginURL = encodeURI(`https://www.instagram.com/oauth/authorize?${createQuery(params)}`);
-  const loginURL = encodeURI(`${redirectUri}?code=asdasdasd`);
+  const params = {
+    enable_fb_login: 0,
+    force_authentication: 1,
+    client_id: igClientId,
+    redirect_uri: redirectUri,
+    response_type: 'code',
+    scope:
+      'instagram_business_basic,instagram_business_manage_messages,instagram_business_manage_comments,instagram_business_content_publish,instagram_business_manage_insights',
+  };
+  const loginURL = encodeURI(`https://www.instagram.com/oauth/authorize?${createQuery(params)}`);
   return (
     <div className="flex items-center justify-center flex-col sm:flex-row w-full h-full sm:max-w-6xl">
       <div className="w-1/2 hidden justify-center items-center h-full sm:flex">
