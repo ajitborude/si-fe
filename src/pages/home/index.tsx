@@ -1,10 +1,13 @@
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
+import { errorMap } from '@/lib/constants';
 import { createQuery } from '@/lib/utils';
 import { BsInstagram } from 'react-icons/bs';
-import { Link } from 'react-router';
+import { Link, useSearchParams } from 'react-router';
 
 function HomePage() {
+  const [searchParams, setSearchParams] = useSearchParams();
+  const errorCode = searchParams.get('error') || null;
   const igClientId = import.meta.env.VITE_APP_IG_CLIENT_ID || '';
   const redirectUri = import.meta.env.VITE_APP_IG_REDIRECT_URI || '';
   const params = {
@@ -32,6 +35,8 @@ function HomePage() {
             <BsInstagram className="text-white" size={35} /> <span className="text-white">Login with Instagram</span>
           </Link>
         </Button>
+        <Separator className="my-2" />
+        {errorCode && <span className="text-destructive">{errorMap[errorCode]}</span>}
       </div>
     </div>
   );
